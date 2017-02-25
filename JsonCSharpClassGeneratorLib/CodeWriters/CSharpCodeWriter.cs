@@ -182,7 +182,9 @@ namespace Xamasoft.JsonClassGenerator.CodeWriters
 
         private void WriteClassMembers(IJsonClassGeneratorConfig config, TextWriter sw, JsonType type, string prefix)
         {
-            foreach (var field in type.Fields)
+            IList<FieldInfo> theFields = type.Fields;
+            if (config.SortMemberFields) theFields = theFields.OrderBy(f => f.JsonMemberName).ToList();
+            foreach (var field in theFields)
             {
                 if (config.UsePascalCase || config.ExamplesInDocumentation) sw.WriteLine();
 

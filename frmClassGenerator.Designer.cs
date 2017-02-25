@@ -69,6 +69,7 @@
             this.button1 = new System.Windows.Forms.Button();
             this.lblDoneClipboard = new System.Windows.Forms.Label();
             this.chkDocumentationExamples = new System.Windows.Forms.CheckBox();
+            this.chkSortMembers = new System.Windows.Forms.CheckBox();
             this.flowLayoutPanel1.SuspendLayout();
             this.flowLayoutPanel2.SuspendLayout();
             this.flowLayoutPanel3.SuspendLayout();
@@ -495,12 +496,26 @@
             this.chkDocumentationExamples.Text = "Generate documentation with data examples";
             this.chkDocumentationExamples.UseVisualStyleBackColor = true;
             // 
+            // chkSortMembers
+            // 
+            this.chkSortMembers.AutoSize = true;
+            this.chkSortMembers.Checked = global::Xamasoft.JsonClassGenerator.UI.Properties.Settings.Default.SortMemberFields;
+            this.chkSortMembers.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkSortMembers.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::Xamasoft.JsonClassGenerator.UI.Properties.Settings.Default, "SortMemberFields", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.chkSortMembers.Location = new System.Drawing.Point(349, 206);
+            this.chkSortMembers.Name = "chkSortMembers";
+            this.chkSortMembers.Size = new System.Drawing.Size(112, 17);
+            this.chkSortMembers.TabIndex = 41;
+            this.chkSortMembers.Text = "Sort member fields";
+            this.chkSortMembers.UseVisualStyleBackColor = true;
+            // 
             // frmCSharpClassGeneration
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnClose;
             this.ClientSize = new System.Drawing.Size(707, 564);
+            this.Controls.Add(this.chkSortMembers);
             this.Controls.Add(this.chkDocumentationExamples);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.lnkOpenFolder);
@@ -590,6 +605,7 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label lblDoneClipboard;
         private System.Windows.Forms.CheckBox chkDocumentationExamples;
+        private System.Windows.Forms.CheckBox chkSortMembers;
     }
 }
 

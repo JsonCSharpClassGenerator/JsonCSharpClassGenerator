@@ -195,6 +195,7 @@ namespace Xamasoft.JsonClassGenerator.UI
             gen.TargetFolder = edtTargetFolder.Text;
             gen.UseProperties = radProperties.Checked;
             gen.MainClass = edtMainClass.Text;
+            gen.SortMemberFields = chkSortMembers.Checked;
             gen.UsePascalCase = chkPascalCase.Checked;
             gen.UseNestedClasses = radNestedClasses.Checked;
             gen.ApplyObfuscationAttributes = chkApplyObfuscationAttributes.Checked;

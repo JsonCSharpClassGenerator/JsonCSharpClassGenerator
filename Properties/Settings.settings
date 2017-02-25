@@ -26,6 +26,9 @@
     <Setting Name="MainClassName" Type="System.String" Scope="User">
       <Value Profile="(Default)">SampleResponse1</Value>
     </Setting>
+    <Setting Name="SortMemberFields" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
     <Setting Name="UsePascalCase" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>

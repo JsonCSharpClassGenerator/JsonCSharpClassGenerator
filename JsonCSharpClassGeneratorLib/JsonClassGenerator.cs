@@ -27,6 +27,7 @@ namespace Xamasoft.JsonClassGenerator
         public bool ExplicitDeserialization { get; set; }
         public bool NoHelperClass { get; set; }
         public string MainClass { get; set; }
+        public bool SortMemberFields { get; set; }
         public bool UsePascalCase { get; set; }
         public bool UseNestedClasses { get; set; }
         public bool ApplyObfuscationAttributes { get; set; }
