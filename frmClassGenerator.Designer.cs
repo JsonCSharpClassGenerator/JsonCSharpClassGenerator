@@ -34,7 +34,6 @@
             this.edtJson = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.lblNamespace = new System.Windows.Forms.Label();
-            this.btnClose = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.radFields = new System.Windows.Forms.RadioButton();
             this.label3 = new System.Windows.Forms.Label();
@@ -62,27 +61,44 @@
             this.chkNoHelper = new System.Windows.Forms.CheckBox();
             this.edtNamespace = new System.Windows.Forms.TextBox();
             this.chkSingleFile = new System.Windows.Forms.CheckBox();
-            this.btnAbout = new System.Windows.Forms.Button();
             this.lblDone = new System.Windows.Forms.Label();
             this.lnkOpenFolder = new Xamasoft.Controls.BetterLinkLabel();
             this.messageTimer = new System.Windows.Forms.Timer(this.components);
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnPasteAndGo = new System.Windows.Forms.Button();
             this.lblDoneClipboard = new System.Windows.Forms.Label();
             this.chkDocumentationExamples = new System.Windows.Forms.CheckBox();
             this.chkSortMembers = new System.Windows.Forms.CheckBox();
+            this.MainMenu = new System.Windows.Forms.MenuStrip();
+            this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.loadJsonFileMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveJsonFileMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveJsonAsMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.closeMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.jsonToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pasteGoMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.generateMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aboutMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openDlg = new System.Windows.Forms.OpenFileDialog();
+            this.saveDlg = new System.Windows.Forms.SaveFileDialog();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.validateMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.closeJsonFileMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.flowLayoutPanel1.SuspendLayout();
             this.flowLayoutPanel2.SuspendLayout();
             this.flowLayoutPanel3.SuspendLayout();
+            this.MainMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnGenerate
             // 
             this.btnGenerate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnGenerate.Location = new System.Drawing.Point(539, 529);
+            this.btnGenerate.Location = new System.Drawing.Point(644, 593);
             this.btnGenerate.Name = "btnGenerate";
-            this.btnGenerate.Size = new System.Drawing.Size(75, 23);
+            this.btnGenerate.Size = new System.Drawing.Size(96, 23);
             this.btnGenerate.TabIndex = 17;
-            this.btnGenerate.Text = "Generate";
+            this.btnGenerate.Text = "&Generate";
             this.btnGenerate.UseVisualStyleBackColor = true;
             this.btnGenerate.Click += new System.EventHandler(this.btnGenerate_Click);
             // 
@@ -91,19 +107,19 @@
             this.edtJson.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.edtJson.Location = new System.Drawing.Point(15, 253);
+            this.edtJson.Location = new System.Drawing.Point(15, 286);
             this.edtJson.MaxLength = 10000000;
             this.edtJson.Multiline = true;
             this.edtJson.Name = "edtJson";
             this.edtJson.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.edtJson.Size = new System.Drawing.Size(680, 271);
+            this.edtJson.Size = new System.Drawing.Size(725, 302);
             this.edtJson.TabIndex = 14;
             this.edtJson.KeyDown += new System.Windows.Forms.KeyEventHandler(this.edtJson_KeyDown);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 237);
+            this.label1.Location = new System.Drawing.Point(12, 270);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(199, 13);
             this.label1.TabIndex = 6;
@@ -112,28 +128,16 @@
             // lblNamespace
             // 
             this.lblNamespace.AutoSize = true;
-            this.lblNamespace.Location = new System.Drawing.Point(12, 12);
+            this.lblNamespace.Location = new System.Drawing.Point(12, 30);
             this.lblNamespace.Name = "lblNamespace";
             this.lblNamespace.Size = new System.Drawing.Size(67, 13);
             this.lblNamespace.TabIndex = 4;
             this.lblNamespace.Text = "Namespace:";
             // 
-            // btnClose
-            // 
-            this.btnClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnClose.Location = new System.Drawing.Point(620, 529);
-            this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(75, 23);
-            this.btnClose.TabIndex = 18;
-            this.btnClose.Text = "Close";
-            this.btnClose.UseVisualStyleBackColor = true;
-            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
-            // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(346, 9);
+            this.label2.Location = new System.Drawing.Point(346, 30);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(106, 13);
             this.label2.TabIndex = 12;
@@ -152,7 +156,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(346, 38);
+            this.label3.Location = new System.Drawing.Point(346, 55);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(46, 13);
             this.label3.TabIndex = 15;
@@ -174,7 +178,7 @@
             this.flowLayoutPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.flowLayoutPanel1.Controls.Add(this.radProperties);
             this.flowLayoutPanel1.Controls.Add(this.radFields);
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(458, 4);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(458, 24);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Size = new System.Drawing.Size(136, 23);
             this.flowLayoutPanel1.TabIndex = 7;
@@ -197,7 +201,7 @@
             this.flowLayoutPanel2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.flowLayoutPanel2.Controls.Add(this.radInternal);
             this.flowLayoutPanel2.Controls.Add(this.radPublic);
-            this.flowLayoutPanel2.Location = new System.Drawing.Point(458, 33);
+            this.flowLayoutPanel2.Location = new System.Drawing.Point(458, 50);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
             this.flowLayoutPanel2.Size = new System.Drawing.Size(126, 23);
             this.flowLayoutPanel2.TabIndex = 8;
@@ -216,7 +220,7 @@
             // 
             // btnBrowse
             // 
-            this.btnBrowse.Location = new System.Drawing.Point(276, 63);
+            this.btnBrowse.Location = new System.Drawing.Point(276, 80);
             this.btnBrowse.Name = "btnBrowse";
             this.btnBrowse.Size = new System.Drawing.Size(24, 23);
             this.btnBrowse.TabIndex = 3;
@@ -227,7 +231,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(12, 68);
+            this.label4.Location = new System.Drawing.Point(12, 85);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(70, 13);
             this.label4.TabIndex = 23;
@@ -245,7 +249,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(12, 40);
+            this.label5.Location = new System.Drawing.Point(12, 57);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(89, 13);
             this.label5.TabIndex = 25;
@@ -254,7 +258,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(12, 118);
+            this.label6.Location = new System.Drawing.Point(12, 135);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(99, 13);
             this.label6.TabIndex = 30;
@@ -303,7 +307,7 @@
             this.flowLayoutPanel3.Controls.Add(this.radDifferentNamespace);
             this.flowLayoutPanel3.Controls.Add(this.edtSecondaryNamespace);
             this.flowLayoutPanel3.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flowLayoutPanel3.Location = new System.Drawing.Point(33, 134);
+            this.flowLayoutPanel3.Location = new System.Drawing.Point(33, 151);
             this.flowLayoutPanel3.Name = "flowLayoutPanel3";
             this.flowLayoutPanel3.Size = new System.Drawing.Size(267, 100);
             this.flowLayoutPanel3.TabIndex = 5;
@@ -314,7 +318,7 @@
             this.cmbLanguage.DisplayMember = "DisplayName";
             this.cmbLanguage.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbLanguage.FormattingEnabled = true;
-            this.cmbLanguage.Location = new System.Drawing.Point(115, 90);
+            this.cmbLanguage.Location = new System.Drawing.Point(115, 107);
             this.cmbLanguage.Name = "cmbLanguage";
             this.cmbLanguage.Size = new System.Drawing.Size(185, 21);
             this.cmbLanguage.TabIndex = 4;
@@ -323,7 +327,7 @@
             // lblLanguage
             // 
             this.lblLanguage.AutoSize = true;
-            this.lblLanguage.Location = new System.Drawing.Point(12, 93);
+            this.lblLanguage.Location = new System.Drawing.Point(12, 110);
             this.lblLanguage.Name = "lblLanguage";
             this.lblLanguage.Size = new System.Drawing.Size(58, 13);
             this.lblLanguage.TabIndex = 37;
@@ -334,7 +338,7 @@
             this.chkApplyObfuscationAttributes.AutoSize = true;
             this.chkApplyObfuscationAttributes.Checked = global::Xamasoft.JsonClassGenerator.UI.Properties.Settings.Default.ApplyObfuscationAttributes;
             this.chkApplyObfuscationAttributes.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::Xamasoft.JsonClassGenerator.UI.Properties.Settings.Default, "ApplyObfuscationAttributes", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.chkApplyObfuscationAttributes.Location = new System.Drawing.Point(349, 136);
+            this.chkApplyObfuscationAttributes.Location = new System.Drawing.Point(349, 153);
             this.chkApplyObfuscationAttributes.Name = "chkApplyObfuscationAttributes";
             this.chkApplyObfuscationAttributes.Size = new System.Drawing.Size(203, 17);
             this.chkApplyObfuscationAttributes.TabIndex = 12;
@@ -346,7 +350,7 @@
             this.chkExplicitDeserialization.AutoSize = true;
             this.chkExplicitDeserialization.Checked = global::Xamasoft.JsonClassGenerator.UI.Properties.Settings.Default.UseExplicitDeserialization;
             this.chkExplicitDeserialization.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::Xamasoft.JsonClassGenerator.UI.Properties.Settings.Default, "UseExplicitDeserialization", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.chkExplicitDeserialization.Location = new System.Drawing.Point(349, 90);
+            this.chkExplicitDeserialization.Location = new System.Drawing.Point(349, 107);
             this.chkExplicitDeserialization.Name = "chkExplicitDeserialization";
             this.chkExplicitDeserialization.Size = new System.Drawing.Size(198, 17);
             this.chkExplicitDeserialization.TabIndex = 10;
@@ -360,7 +364,7 @@
             this.chkPascalCase.Checked = global::Xamasoft.JsonClassGenerator.UI.Properties.Settings.Default.UsePascalCase;
             this.chkPascalCase.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkPascalCase.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::Xamasoft.JsonClassGenerator.UI.Properties.Settings.Default, "UsePascalCase", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.chkPascalCase.Location = new System.Drawing.Point(349, 67);
+            this.chkPascalCase.Location = new System.Drawing.Point(349, 84);
             this.chkPascalCase.Name = "chkPascalCase";
             this.chkPascalCase.Size = new System.Drawing.Size(134, 17);
             this.chkPascalCase.TabIndex = 9;
@@ -370,7 +374,7 @@
             // edtMainClass
             // 
             this.edtMainClass.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::Xamasoft.JsonClassGenerator.UI.Properties.Settings.Default, "MainClassName", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.edtMainClass.Location = new System.Drawing.Point(115, 37);
+            this.edtMainClass.Location = new System.Drawing.Point(115, 54);
             this.edtMainClass.Name = "edtMainClass";
             this.edtMainClass.Size = new System.Drawing.Size(185, 20);
             this.edtMainClass.TabIndex = 1;
@@ -382,7 +386,7 @@
             this.edtTargetFolder.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.edtTargetFolder.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.FileSystemDirectories;
             this.edtTargetFolder.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::Xamasoft.JsonClassGenerator.UI.Properties.Settings.Default, "TargetFolder", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.edtTargetFolder.Location = new System.Drawing.Point(115, 65);
+            this.edtTargetFolder.Location = new System.Drawing.Point(115, 82);
             this.edtTargetFolder.Name = "edtTargetFolder";
             this.edtTargetFolder.Size = new System.Drawing.Size(155, 20);
             this.edtTargetFolder.TabIndex = 2;
@@ -393,7 +397,7 @@
             this.chkNoHelper.AutoSize = true;
             this.chkNoHelper.Checked = global::Xamasoft.JsonClassGenerator.UI.Properties.Settings.Default.NoHelper;
             this.chkNoHelper.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::Xamasoft.JsonClassGenerator.UI.Properties.Settings.Default, "NoHelper", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.chkNoHelper.Location = new System.Drawing.Point(366, 113);
+            this.chkNoHelper.Location = new System.Drawing.Point(366, 130);
             this.chkNoHelper.Name = "chkNoHelper";
             this.chkNoHelper.Size = new System.Drawing.Size(162, 17);
             this.chkNoHelper.TabIndex = 11;
@@ -403,7 +407,7 @@
             // edtNamespace
             // 
             this.edtNamespace.DataBindings.Add(new System.Windows.Forms.Binding("Text", global::Xamasoft.JsonClassGenerator.UI.Properties.Settings.Default, "Namespace", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.edtNamespace.Location = new System.Drawing.Point(115, 9);
+            this.edtNamespace.Location = new System.Drawing.Point(115, 27);
             this.edtNamespace.Name = "edtNamespace";
             this.edtNamespace.Size = new System.Drawing.Size(185, 20);
             this.edtNamespace.TabIndex = 0;
@@ -413,23 +417,12 @@
             // chkSingleFile
             // 
             this.chkSingleFile.AutoSize = true;
-            this.chkSingleFile.Location = new System.Drawing.Point(349, 160);
+            this.chkSingleFile.Location = new System.Drawing.Point(349, 177);
             this.chkSingleFile.Name = "chkSingleFile";
             this.chkSingleFile.Size = new System.Drawing.Size(125, 17);
             this.chkSingleFile.TabIndex = 13;
             this.chkSingleFile.Text = "Generate a single file";
             this.chkSingleFile.UseVisualStyleBackColor = true;
-            // 
-            // btnAbout
-            // 
-            this.btnAbout.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnAbout.Location = new System.Drawing.Point(15, 529);
-            this.btnAbout.Name = "btnAbout";
-            this.btnAbout.Size = new System.Drawing.Size(75, 23);
-            this.btnAbout.TabIndex = 15;
-            this.btnAbout.Text = "About...";
-            this.btnAbout.UseVisualStyleBackColor = true;
-            this.btnAbout.Click += new System.EventHandler(this.btnAbout_Click);
             // 
             // lblDone
             // 
@@ -437,7 +430,7 @@
             this.lblDone.AutoSize = true;
             this.lblDone.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblDone.ForeColor = System.Drawing.Color.Green;
-            this.lblDone.Location = new System.Drawing.Point(319, 534);
+            this.lblDone.Location = new System.Drawing.Point(421, 598);
             this.lblDone.Name = "lblDone";
             this.lblDone.Size = new System.Drawing.Size(39, 13);
             this.lblDone.TabIndex = 38;
@@ -448,7 +441,7 @@
             // 
             this.lnkOpenFolder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.lnkOpenFolder.AutoSize = true;
-            this.lnkOpenFolder.Location = new System.Drawing.Point(364, 534);
+            this.lnkOpenFolder.Location = new System.Drawing.Point(466, 598);
             this.lnkOpenFolder.Name = "lnkOpenFolder";
             this.lnkOpenFolder.Size = new System.Drawing.Size(62, 13);
             this.lnkOpenFolder.TabIndex = 39;
@@ -462,16 +455,16 @@
             this.messageTimer.Interval = 7000;
             this.messageTimer.Tick += new System.EventHandler(this.messageTimer_Tick);
             // 
-            // button1
+            // btnPasteAndGo
             // 
-            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.Location = new System.Drawing.Point(437, 529);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(96, 23);
-            this.button1.TabIndex = 16;
-            this.button1.Text = "Paste && go (F9)";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.btnPasteAndGo_Click);
+            this.btnPasteAndGo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnPasteAndGo.Location = new System.Drawing.Point(542, 593);
+            this.btnPasteAndGo.Name = "btnPasteAndGo";
+            this.btnPasteAndGo.Size = new System.Drawing.Size(96, 23);
+            this.btnPasteAndGo.TabIndex = 16;
+            this.btnPasteAndGo.Text = "Paste && go (F9)";
+            this.btnPasteAndGo.UseVisualStyleBackColor = true;
+            this.btnPasteAndGo.Click += new System.EventHandler(this.btnPasteAndGo_Click);
             // 
             // lblDoneClipboard
             // 
@@ -479,7 +472,7 @@
             this.lblDoneClipboard.AutoSize = true;
             this.lblDoneClipboard.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblDoneClipboard.ForeColor = System.Drawing.Color.Green;
-            this.lblDoneClipboard.Location = new System.Drawing.Point(243, 534);
+            this.lblDoneClipboard.Location = new System.Drawing.Point(345, 598);
             this.lblDoneClipboard.Name = "lblDoneClipboard";
             this.lblDoneClipboard.Size = new System.Drawing.Size(183, 13);
             this.lblDoneClipboard.TabIndex = 38;
@@ -489,7 +482,7 @@
             // chkDocumentationExamples
             // 
             this.chkDocumentationExamples.AutoSize = true;
-            this.chkDocumentationExamples.Location = new System.Drawing.Point(349, 183);
+            this.chkDocumentationExamples.Location = new System.Drawing.Point(349, 200);
             this.chkDocumentationExamples.Name = "chkDocumentationExamples";
             this.chkDocumentationExamples.Size = new System.Drawing.Size(236, 17);
             this.chkDocumentationExamples.TabIndex = 40;
@@ -502,22 +495,154 @@
             this.chkSortMembers.Checked = global::Xamasoft.JsonClassGenerator.UI.Properties.Settings.Default.SortMemberFields;
             this.chkSortMembers.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkSortMembers.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::Xamasoft.JsonClassGenerator.UI.Properties.Settings.Default, "SortMemberFields", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.chkSortMembers.Location = new System.Drawing.Point(349, 206);
+            this.chkSortMembers.Location = new System.Drawing.Point(349, 223);
             this.chkSortMembers.Name = "chkSortMembers";
             this.chkSortMembers.Size = new System.Drawing.Size(112, 17);
             this.chkSortMembers.TabIndex = 41;
             this.chkSortMembers.Text = "Sort member fields";
             this.chkSortMembers.UseVisualStyleBackColor = true;
             // 
+            // MainMenu
+            // 
+            this.MainMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.fileToolStripMenuItem,
+            this.jsonToolStripMenuItem,
+            this.helpToolStripMenuItem});
+            this.MainMenu.Location = new System.Drawing.Point(0, 0);
+            this.MainMenu.Name = "MainMenu";
+            this.MainMenu.Size = new System.Drawing.Size(752, 24);
+            this.MainMenu.TabIndex = 42;
+            this.MainMenu.Text = "menuStrip1";
+            // 
+            // fileToolStripMenuItem
+            // 
+            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.loadJsonFileMenuItem,
+            this.saveJsonFileMenuItem,
+            this.saveJsonAsMenuItem,
+            this.closeJsonFileMenuItem,
+            this.toolStripSeparator1,
+            this.closeMenuItem});
+            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+            this.fileToolStripMenuItem.Text = "&File";
+            // 
+            // loadJsonFileMenuItem
+            // 
+            this.loadJsonFileMenuItem.Name = "loadJsonFileMenuItem";
+            this.loadJsonFileMenuItem.Size = new System.Drawing.Size(185, 22);
+            this.loadJsonFileMenuItem.Text = "&Load Json File";
+            this.loadJsonFileMenuItem.Click += new System.EventHandler(this.btnLoadJsonFile_Clicked);
+            // 
+            // saveJsonFileMenuItem
+            // 
+            this.saveJsonFileMenuItem.Name = "saveJsonFileMenuItem";
+            this.saveJsonFileMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
+            this.saveJsonFileMenuItem.Size = new System.Drawing.Size(185, 22);
+            this.saveJsonFileMenuItem.Text = "&Save Json File";
+            this.saveJsonFileMenuItem.Click += new System.EventHandler(this.btnSaveJsonFile_Clicked);
+            // 
+            // saveJsonAsMenuItem
+            // 
+            this.saveJsonAsMenuItem.Name = "saveJsonAsMenuItem";
+            this.saveJsonAsMenuItem.Size = new System.Drawing.Size(185, 22);
+            this.saveJsonAsMenuItem.Text = "Save Json &As";
+            this.saveJsonAsMenuItem.Click += new System.EventHandler(this.SaveJsonFileAs_Clicked);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(182, 6);
+            // 
+            // closeMenuItem
+            // 
+            this.closeMenuItem.Name = "closeMenuItem";
+            this.closeMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.F4)));
+            this.closeMenuItem.Size = new System.Drawing.Size(185, 22);
+            this.closeMenuItem.Text = "E&xit";
+            this.closeMenuItem.Click += new System.EventHandler(this.btnClose_Click);
+            // 
+            // jsonToolStripMenuItem
+            // 
+            this.jsonToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.pasteGoMenuItem,
+            this.generateMenuItem,
+            this.toolStripSeparator2,
+            this.validateMenuItem});
+            this.jsonToolStripMenuItem.Name = "jsonToolStripMenuItem";
+            this.jsonToolStripMenuItem.Size = new System.Drawing.Size(42, 20);
+            this.jsonToolStripMenuItem.Text = "&Json";
+            // 
+            // pasteGoMenuItem
+            // 
+            this.pasteGoMenuItem.Name = "pasteGoMenuItem";
+            this.pasteGoMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F9;
+            this.pasteGoMenuItem.Size = new System.Drawing.Size(159, 22);
+            this.pasteGoMenuItem.Text = "&Paste && Go";
+            this.pasteGoMenuItem.Click += new System.EventHandler(this.btnPasteAndGo_Click);
+            // 
+            // generateMenuItem
+            // 
+            this.generateMenuItem.Name = "generateMenuItem";
+            this.generateMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.G)));
+            this.generateMenuItem.Size = new System.Drawing.Size(159, 22);
+            this.generateMenuItem.Text = "&Generate";
+            this.generateMenuItem.Click += new System.EventHandler(this.btnGenerate_Click);
+            // 
+            // helpToolStripMenuItem
+            // 
+            this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.aboutMenuItem});
+            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+            this.helpToolStripMenuItem.Text = "&Help";
+            // 
+            // aboutMenuItem
+            // 
+            this.aboutMenuItem.Name = "aboutMenuItem";
+            this.aboutMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F1;
+            this.aboutMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.aboutMenuItem.Text = "&About";
+            this.aboutMenuItem.Click += new System.EventHandler(this.btnAbout_Click);
+            // 
+            // openDlg
+            // 
+            this.openDlg.Filter = "JSON files (*,json)|*.json|All files (*.*)|*.*";
+            this.openDlg.Title = "Select JSON file";
+            // 
+            // saveDlg
+            // 
+            this.saveDlg.Filter = "JSON files (*.json)|*.json|All files (*.*)|*.*";
+            this.saveDlg.Title = "Save JSON file";
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(156, 6);
+            // 
+            // validateMenuItem
+            // 
+            this.validateMenuItem.Name = "validateMenuItem";
+            this.validateMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.V)));
+            this.validateMenuItem.Size = new System.Drawing.Size(159, 22);
+            this.validateMenuItem.Text = "&Validate";
+            this.validateMenuItem.Click += new System.EventHandler(this.btnValidate_Clicked);
+            // 
+            // closeJsonFileMenuItem
+            // 
+            this.closeJsonFileMenuItem.Name = "closeJsonFileMenuItem";
+            this.closeJsonFileMenuItem.Size = new System.Drawing.Size(185, 22);
+            this.closeJsonFileMenuItem.Text = "&Close Json File";
+            this.closeJsonFileMenuItem.Click += new System.EventHandler(this.btnCloseJsonFile_Clicked);
+            // 
             // frmCSharpClassGeneration
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.CancelButton = this.btnClose;
-            this.ClientSize = new System.Drawing.Size(707, 564);
+            this.ClientSize = new System.Drawing.Size(752, 628);
             this.Controls.Add(this.chkSortMembers);
             this.Controls.Add(this.chkDocumentationExamples);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnPasteAndGo);
             this.Controls.Add(this.lnkOpenFolder);
             this.Controls.Add(this.lblDoneClipboard);
             this.Controls.Add(this.lblDone);
@@ -529,7 +654,6 @@
             this.Controls.Add(this.label6);
             this.Controls.Add(this.chkExplicitDeserialization);
             this.Controls.Add(this.chkPascalCase);
-            this.Controls.Add(this.btnAbout);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.edtMainClass);
             this.Controls.Add(this.label4);
@@ -540,16 +664,18 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.chkNoHelper);
-            this.Controls.Add(this.btnClose);
             this.Controls.Add(this.lblNamespace);
             this.Controls.Add(this.edtNamespace);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.edtJson);
             this.Controls.Add(this.btnGenerate);
+            this.Controls.Add(this.MainMenu);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
+            this.MainMenuStrip = this.MainMenu;
             this.MinimumSize = new System.Drawing.Size(671, 444);
             this.Name = "frmCSharpClassGeneration";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Xamasoft JSON Class Generator";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmCSharpClassGeneration_FormClosing);
             this.Load += new System.EventHandler(this.frmCSharpClassGeneration_Load);
@@ -559,6 +685,8 @@
             this.flowLayoutPanel2.PerformLayout();
             this.flowLayoutPanel3.ResumeLayout(false);
             this.flowLayoutPanel3.PerformLayout();
+            this.MainMenu.ResumeLayout(false);
+            this.MainMenu.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -571,7 +699,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox edtNamespace;
         private System.Windows.Forms.Label lblNamespace;
-        private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.CheckBox chkNoHelper;
         private System.Windows.Forms.TextBox edtSecondaryNamespace;
         private System.Windows.Forms.Label label2;
@@ -587,7 +714,6 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox edtMainClass;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Button btnAbout;
         private System.Windows.Forms.CheckBox chkPascalCase;
         private System.Windows.Forms.CheckBox chkExplicitDeserialization;
         private System.Windows.Forms.Label label6;
@@ -602,10 +728,27 @@
         private System.Windows.Forms.Label lblDone;
         private Xamasoft.Controls.BetterLinkLabel lnkOpenFolder;
         private System.Windows.Forms.Timer messageTimer;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnPasteAndGo;
         private System.Windows.Forms.Label lblDoneClipboard;
         private System.Windows.Forms.CheckBox chkDocumentationExamples;
         private System.Windows.Forms.CheckBox chkSortMembers;
+        private System.Windows.Forms.MenuStrip MainMenu;
+        private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem loadJsonFileMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem saveJsonFileMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem saveJsonAsMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem closeMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem jsonToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem pasteGoMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem generateMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem aboutMenuItem;
+        private System.Windows.Forms.OpenFileDialog openDlg;
+        private System.Windows.Forms.SaveFileDialog saveDlg;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripMenuItem validateMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem closeJsonFileMenuItem;
     }
 }
 
