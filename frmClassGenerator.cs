@@ -1,27 +1,20 @@
 ﻿// Copyright © 2010 Xamasoft
 
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
+using Newtonsoft.Json.Linq;
 using Xamasoft.JsonClassGenerator.CodeWriters;
-
+using Xamasoft.JsonClassGenerator.UI.Properties;
 
 
 namespace Xamasoft.JsonClassGenerator.UI
 {
     public partial class frmCSharpClassGeneration : Form
     {
-
-
-
-
         public frmCSharpClassGeneration()
         {
             InitializeComponent();
@@ -47,6 +40,12 @@ namespace Xamasoft.JsonClassGenerator.UI
 
         private void frmCSharpClassGeneration_FormClosing(object sender, FormClosingEventArgs e)
         {
+            if (SaveIfModified() == false)
+            {
+                e.Cancel = true;
+                return;
+            }
+
             var settings = Properties.Settings.Default;
             settings.UseProperties = radProperties.Checked;
             settings.InternalVisibility = radInternal.Checked;
@@ -262,25 +261,6 @@ namespace Xamasoft.JsonClassGenerator.UI
             UpdateStatus();
         }
 
-
-        protected override void OnKeyDown(KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.F1)
-            {
-                e.Handled = true;
-                using (var f = new frmAbout())
-                {
-                    f.ShowDialog(this);
-                }
-            }
-            else if (e.KeyCode == Keys.F9)
-            {
-                e.Handled = true;
-                PasteAndGo();
-            }
-            base.OnKeyDown(e);
-        }
-
         private void messageTimer_Tick(object sender, EventArgs e)
         {
             messageTimer.Stop();
@@ -322,6 +302,133 @@ namespace Xamasoft.JsonClassGenerator.UI
             PasteAndGo();
         }
 
+        #region Json file load/save handlers
+
+        private void btnLoadJsonFile_Clicked(object sender, EventArgs e)
+        {
+            if (SaveIfModified() == false) return;
+            if (openDlg.ShowDialog() == DialogResult.Cancel) return;
+
+            var fileToRead = openDlg.FileName;
+
+            try
+            {
+                edtJson.Text = File.ReadAllText(fileToRead);
+                edtJson.Tag = fileToRead;
+                edtJson.Modified = false;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(string.Format(Resources.JsonFileLoadError, ex.Message),
+                    Resources.UnableToLoadTitle,
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnSaveJsonFile_Clicked(object sender, EventArgs e) { SaveJsonFile(); }
+
+        private void SaveJsonFileAs_Clicked(object sender, EventArgs e) { SaveJsonFileAs(); }
+
+        private void btnCloseJsonFile_Clicked(object sender, EventArgs e)
+        {
+            if (SaveIfModified() == false) return;
+
+            edtJson.Text = string.Empty;
+            edtJson.Tag = null;
+            edtJson.Modified = false;
+        }
+
+        private void SaveJsonFile()
+        {
+            if (edtJson.Tag == null)
+            {
+                SaveJsonFileAs();
+                return;
+            }
+
+            SaveEditWindow();
+        }
+
+        private void SaveJsonFileAs()
+        {
+            if (saveDlg.ShowDialog() == DialogResult.Cancel) return;
+
+            edtJson.Tag = saveDlg.FileName;
+            SaveEditWindow();
+        }
+
+        private void SaveEditWindow()
+        {
+            try
+            {
+                File.WriteAllText(edtJson.Tag.ToString(), edtJson.Text);
+                edtJson.Modified = false;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(string.Format(Resources.UnableToSaveJsonFile, ex.Message),
+                    Resources.JsonSaveFailedTitle,
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+            }
+        }
+
+        /// <summary>
+        /// Saves the edit buffer if it has been modified. 
+        /// </summary>
+        /// <returns>
+        /// true if (a) the edit window has not been changed, (b) the file has been successfully saved, (c) the user
+        /// says they do not want to save the file. Returns false if the user (a) cancels or (b) the save fails.
+        /// </returns>
+        private bool SaveIfModified()
+        {
+            if (!edtJson.Modified || string.IsNullOrWhiteSpace(edtJson.Text)) return true;
+
+            var response = MessageBox.Show(Resources.YourFileHasChanged,
+                Resources.SaveChangesTitle,
+                MessageBoxButtons.YesNoCancel,
+                MessageBoxIcon.Question);
+
+            switch (response)
+            {
+                case DialogResult.Cancel:
+                    return false;
+
+                case DialogResult.Yes:
+                    SaveJsonFile();
+                    // If the buffer is still modified, then the save failed.
+                    if (edtJson.Modified)
+                    {
+                        return false;
+                    }
+                    break;
+            }
+
+            return true;
+        }
+
+        #endregion
+
+        #region Json validation
+
+        private void btnValidate_Clicked(object sender, EventArgs e)
+        {
+            try
+            {
+                JObject.Parse(edtJson.Text);
+                MessageBox.Show(Resources.JsonValidationOk, Resources.JsonValidationTitle, 
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(string.Format(Resources.JsonValidationErrors, ex.Message), Resources.JsonValidationTitle,
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        #endregion
+
         //private void edtMainClass_Enter(object sender, EventArgs e)
         //{
 
@@ -343,13 +450,5 @@ namespace Xamasoft.JsonClassGenerator.UI
         //{
         //    edtJson.SelectAll();
         //}
-
-
-
-
-
-
-
-
     }
 }

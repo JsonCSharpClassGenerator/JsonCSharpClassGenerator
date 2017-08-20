@@ -112,16 +112,49 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="help" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\help.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="logo" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\logo.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="YourFileHasChanged" xml:space="preserve">
+    <value>Your file has been changed. Do you want to save those changes?</value>
+  </data>
+  <data name="SaveChangesTitle" xml:space="preserve">
+    <value>Save Changes?</value>
+  </data>
+  <data name="JsonFileLoadError" xml:space="preserve">
+    <value>File load error:
+
+{0}</value>
+  </data>
+  <data name="UnableToLoadTitle" xml:space="preserve">
+    <value>Unable to load file</value>
+  </data>
+  <data name="JsonSaveFailedTitle" xml:space="preserve">
+    <value>Save failed</value>
+  </data>
+  <data name="UnableToSaveJsonFile" xml:space="preserve">
+    <value>The file save process failed:
+
+{0}</value>
+  </data>
+  <data name="JsonValidationOk" xml:space="preserve">
+    <value>Your JSON is valid</value>
+  </data>
+  <data name="JsonValidationErrors" xml:space="preserve">
+    <value>Your JSON is not valid:
+
+{0}</value>
+  </data>
+  <data name="JsonValidationTitle" xml:space="preserve">
+    <value>JSON Validator</value>
   </data>
 </root>
