@@ -8,6 +8,7 @@ using System.Linq;
 using System.Windows.Forms;
 using Newtonsoft.Json.Linq;
 using Xamasoft.JsonClassGenerator.CodeWriters;
+using Xamasoft.JsonClassGenerator.UI.Helpers;
 using Xamasoft.JsonClassGenerator.UI.Properties;
 
 
@@ -21,6 +22,14 @@ namespace Xamasoft.JsonClassGenerator.UI
             this.Font = SystemFonts.MessageBoxFont;
 
             Program.InitAppServices();
+            InitialiseSyntaxHighlightingEditor();
+        }
+
+        private void InitialiseSyntaxHighlightingEditor()
+        {
+            edtJson.Styler = new JsonStyler();              // The thing that sets Json syntax highlighting
+            edtJson.Text = string.Empty;                    // Clear any developer entered dummy data
+            edtJson.SetSavePoint();                         // Show the buffer has not been changed.
         }
 
         private void btnBrowse_Click(object sender, EventArgs e)
@@ -292,7 +301,7 @@ namespace Xamasoft.JsonClassGenerator.UI
             if (e.Control && e.KeyCode == Keys.A)
             {
                 edtJson.SelectionStart = 0;
-                edtJson.SelectionLength = edtJson.TextLength;
+                edtJson.SelectionEnd = edtJson.TextLength;
                 e.Handled = true;
             }
         }
@@ -315,7 +324,8 @@ namespace Xamasoft.JsonClassGenerator.UI
             {
                 edtJson.Text = File.ReadAllText(fileToRead);
                 edtJson.Tag = fileToRead;
-                edtJson.Modified = false;
+                edtJson.SetSavePoint();
+                UpdateCursorPosition();
             }
             catch (Exception ex)
             {
@@ -336,7 +346,8 @@ namespace Xamasoft.JsonClassGenerator.UI
 
             edtJson.Text = string.Empty;
             edtJson.Tag = null;
-            edtJson.Modified = false;
+            edtJson.SetSavePoint();
+            UpdateCursorPosition();
         }
 
         private void SaveJsonFile()
@@ -363,7 +374,8 @@ namespace Xamasoft.JsonClassGenerator.UI
             try
             {
                 File.WriteAllText(edtJson.Tag.ToString(), edtJson.Text);
-                edtJson.Modified = false;
+                edtJson.SetSavePoint();
+                UpdateCursorPosition();
             }
             catch (Exception ex)
             {
@@ -426,6 +438,13 @@ namespace Xamasoft.JsonClassGenerator.UI
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
+
+        private void EditorPositionChanged(object sender, EventArgs e) { UpdateCursorPosition(); }
+        private void UpdateCursorPosition()
+        {
+            lblPosition.Text = $"{edtJson.CurrentLine + 1}/{edtJson.GetColumn(edtJson.CurrentPosition) + 1}";
+        }
+
 
         #endregion
 

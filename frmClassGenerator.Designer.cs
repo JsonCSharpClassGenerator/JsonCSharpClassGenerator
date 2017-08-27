@@ -31,7 +31,6 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmCSharpClassGeneration));
             this.btnGenerate = new System.Windows.Forms.Button();
-            this.edtJson = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.lblNamespace = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -73,18 +72,20 @@
             this.loadJsonFileMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveJsonFileMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveJsonAsMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.closeJsonFileMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.closeMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.jsonToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pasteGoMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.generateMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.validateMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openDlg = new System.Windows.Forms.OpenFileDialog();
             this.saveDlg = new System.Windows.Forms.SaveFileDialog();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.validateMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.closeJsonFileMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.edtJson = new EasyScintilla.SimpleEditor();
+            this.lblPosition = new System.Windows.Forms.Label();
             this.flowLayoutPanel1.SuspendLayout();
             this.flowLayoutPanel2.SuspendLayout();
             this.flowLayoutPanel3.SuspendLayout();
@@ -102,24 +103,10 @@
             this.btnGenerate.UseVisualStyleBackColor = true;
             this.btnGenerate.Click += new System.EventHandler(this.btnGenerate_Click);
             // 
-            // edtJson
-            // 
-            this.edtJson.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.edtJson.Location = new System.Drawing.Point(15, 286);
-            this.edtJson.MaxLength = 10000000;
-            this.edtJson.Multiline = true;
-            this.edtJson.Name = "edtJson";
-            this.edtJson.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.edtJson.Size = new System.Drawing.Size(725, 302);
-            this.edtJson.TabIndex = 14;
-            this.edtJson.KeyDown += new System.Windows.Forms.KeyEventHandler(this.edtJson_KeyDown);
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 270);
+            this.label1.Location = new System.Drawing.Point(12, 260);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(199, 13);
             this.label1.TabIndex = 6;
@@ -549,6 +536,13 @@
             this.saveJsonAsMenuItem.Text = "Save Json &As";
             this.saveJsonAsMenuItem.Click += new System.EventHandler(this.SaveJsonFileAs_Clicked);
             // 
+            // closeJsonFileMenuItem
+            // 
+            this.closeJsonFileMenuItem.Name = "closeJsonFileMenuItem";
+            this.closeJsonFileMenuItem.Size = new System.Drawing.Size(185, 22);
+            this.closeJsonFileMenuItem.Text = "&Close Json File";
+            this.closeJsonFileMenuItem.Click += new System.EventHandler(this.btnCloseJsonFile_Clicked);
+            // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
@@ -589,32 +583,6 @@
             this.generateMenuItem.Text = "&Generate";
             this.generateMenuItem.Click += new System.EventHandler(this.btnGenerate_Click);
             // 
-            // helpToolStripMenuItem
-            // 
-            this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.aboutMenuItem});
-            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
-            this.helpToolStripMenuItem.Text = "&Help";
-            // 
-            // aboutMenuItem
-            // 
-            this.aboutMenuItem.Name = "aboutMenuItem";
-            this.aboutMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F1;
-            this.aboutMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.aboutMenuItem.Text = "&About";
-            this.aboutMenuItem.Click += new System.EventHandler(this.btnAbout_Click);
-            // 
-            // openDlg
-            // 
-            this.openDlg.Filter = "JSON files (*,json)|*.json|All files (*.*)|*.*";
-            this.openDlg.Title = "Select JSON file";
-            // 
-            // saveDlg
-            // 
-            this.saveDlg.Filter = "JSON files (*.json)|*.json|All files (*.*)|*.*";
-            this.saveDlg.Title = "Save JSON file";
-            // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
@@ -628,18 +596,64 @@
             this.validateMenuItem.Text = "&Validate";
             this.validateMenuItem.Click += new System.EventHandler(this.btnValidate_Clicked);
             // 
-            // closeJsonFileMenuItem
+            // helpToolStripMenuItem
             // 
-            this.closeJsonFileMenuItem.Name = "closeJsonFileMenuItem";
-            this.closeJsonFileMenuItem.Size = new System.Drawing.Size(185, 22);
-            this.closeJsonFileMenuItem.Text = "&Close Json File";
-            this.closeJsonFileMenuItem.Click += new System.EventHandler(this.btnCloseJsonFile_Clicked);
+            this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.aboutMenuItem});
+            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+            this.helpToolStripMenuItem.Text = "&Help";
+            // 
+            // aboutMenuItem
+            // 
+            this.aboutMenuItem.Name = "aboutMenuItem";
+            this.aboutMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F1;
+            this.aboutMenuItem.Size = new System.Drawing.Size(126, 22);
+            this.aboutMenuItem.Text = "&About";
+            this.aboutMenuItem.Click += new System.EventHandler(this.btnAbout_Click);
+            // 
+            // openDlg
+            // 
+            this.openDlg.Filter = "JSON files (*,json)|*.json|All files (*.*)|*.*";
+            this.openDlg.Title = "Select JSON file";
+            // 
+            // saveDlg
+            // 
+            this.saveDlg.Filter = "JSON files (*.json)|*.json|All files (*.*)|*.*";
+            this.saveDlg.Title = "Save JSON file";
+            // 
+            // edtJson
+            // 
+            this.edtJson.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.edtJson.IndentationGuides = ScintillaNET.IndentView.LookBoth;
+            this.edtJson.Location = new System.Drawing.Point(15, 276);
+            this.edtJson.Name = "edtJson";
+            this.edtJson.Size = new System.Drawing.Size(725, 311);
+            this.edtJson.Styler = null;
+            this.edtJson.TabIndex = 43;
+            this.edtJson.KeyDown += new System.Windows.Forms.KeyEventHandler(this.edtJson_KeyDown);
+            this.edtJson.KeyUp += new System.Windows.Forms.KeyEventHandler(this.EditorPositionChanged);
+            this.edtJson.MouseClick += new System.Windows.Forms.MouseEventHandler(this.EditorPositionChanged);
+            // 
+            // lblPosition
+            // 
+            this.lblPosition.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lblPosition.AutoSize = true;
+            this.lblPosition.Location = new System.Drawing.Point(15, 589);
+            this.lblPosition.Name = "lblPosition";
+            this.lblPosition.Size = new System.Drawing.Size(30, 13);
+            this.lblPosition.TabIndex = 44;
+            this.lblPosition.Text = "0 / 0";
             // 
             // frmCSharpClassGeneration
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(752, 628);
+            this.Controls.Add(this.lblPosition);
+            this.Controls.Add(this.edtJson);
             this.Controls.Add(this.chkSortMembers);
             this.Controls.Add(this.chkDocumentationExamples);
             this.Controls.Add(this.btnPasteAndGo);
@@ -667,7 +681,6 @@
             this.Controls.Add(this.lblNamespace);
             this.Controls.Add(this.edtNamespace);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.edtJson);
             this.Controls.Add(this.btnGenerate);
             this.Controls.Add(this.MainMenu);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -695,7 +708,6 @@
         #endregion
 
         private System.Windows.Forms.Button btnGenerate;
-        private System.Windows.Forms.TextBox edtJson;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox edtNamespace;
         private System.Windows.Forms.Label lblNamespace;
@@ -749,6 +761,8 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripMenuItem validateMenuItem;
         private System.Windows.Forms.ToolStripMenuItem closeJsonFileMenuItem;
+        private EasyScintilla.SimpleEditor edtJson;
+        private System.Windows.Forms.Label lblPosition;
     }
 }
 
