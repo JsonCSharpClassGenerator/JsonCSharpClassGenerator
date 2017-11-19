@@ -27,7 +27,7 @@
       <Value Profile="(Default)">SampleResponse1</Value>
     </Setting>
     <Setting Name="SortMemberFields" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">True</Value>
+      <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="UsePascalCase" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
@@ -48,6 +48,9 @@
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="DocumentationExamples" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="DeDuplicateClasses" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
   </Settings>

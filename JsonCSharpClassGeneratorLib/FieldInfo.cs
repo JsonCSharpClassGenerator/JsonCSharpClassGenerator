@@ -26,6 +26,12 @@ namespace Xamasoft.JsonClassGenerator
         public JsonType Type { get; private set; }
         public IList<object> Examples { get; private set; }
 
+        public void UpdateMemberName(string newMemberName)
+        {
+            MemberName = newMemberName;
+            JsonMemberName = newMemberName;
+        }
+
         public string GetGenerationCode(string jobject)
         {
             var field = this;

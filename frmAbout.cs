@@ -47,6 +47,9 @@ namespace Xamasoft.JsonClassGenerator.UI
 #endif
         }
 
-
+        private void githubLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://github.com/JsonCSharpClassGenerator/JsonCSharpClassGenerator");
+        }
     }
 }

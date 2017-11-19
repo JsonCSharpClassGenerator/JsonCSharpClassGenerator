@@ -73,11 +73,12 @@ namespace Xamasoft.JsonClassGenerator
         public JsonTypeEnum Type { get; private set; }
         public JsonType InternalType { get; private set; }
         public string AssignedName { get; private set; }
+        public string OriginalName { get; private set; }
 
-
-        public void AssignName(string name)
+        public void AssignName(string name, string originalName)
         {
             AssignedName = name;
+            OriginalName = originalName;
         }
 
 

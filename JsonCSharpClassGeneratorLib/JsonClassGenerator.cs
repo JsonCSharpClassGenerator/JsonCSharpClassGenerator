@@ -8,6 +8,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.IO;
 using System.Data.Entity.Design.PluralizationServices;
+using System.Diagnostics;
 using System.Globalization;
 using Xamasoft.JsonClassGenerator.CodeWriters;
 
@@ -16,8 +17,6 @@ namespace Xamasoft.JsonClassGenerator
 {
     public class JsonClassGenerator : IJsonClassGeneratorConfig
     {
-
-
         public string Example { get; set; }
         public string TargetFolder { get; set; }
         public string Namespace { get; set; }
@@ -36,6 +35,7 @@ namespace Xamasoft.JsonClassGenerator
         public TextWriter OutputStream { get; set; }
         public bool AlwaysUseNullableValues { get; set; }
         public bool ExamplesInDocumentation { get; set; }
+        public bool DeduplicateClasses { get; set; }
 
         private PluralizationService pluralizationService = PluralizationService.CreateService(new CultureInfo("en-us"));
 
@@ -75,13 +75,17 @@ namespace Xamasoft.JsonClassGenerator
                 }
             }
 
-
             Types = new List<JsonType>();
             Names.Add(MainClass);
             var rootType = new JsonType(this, examples[0]);
             rootType.IsRoot = true;
-            rootType.AssignName(MainClass);
+            rootType.AssignName(MainClass, MainClass);
             GenerateClass(examples, rootType);
+
+            if (DeduplicateClasses)
+            {
+                DeDuplicateClasses();
+            }
 
             if (writeToDisk)
             {
@@ -114,6 +118,111 @@ namespace Xamasoft.JsonClassGenerator
                 WriteClassesToFile(OutputStream, Types);
             }
 
+        }
+
+        /// <summary>
+        /// De-duplicate classes.
+        /// </summary>
+        /// <remarks>
+        /// So, we have a bunch of classes. Th eproblem is, if structures have been nested, we might end up with
+        /// many classes which are all duplicates in everything but name. This bit of logic is intended to clean
+        /// this up as best it can.
+        /// 
+        /// First, we get all of the "base" classes. These are all of the classes that were the first generated 
+        /// classes. The first occurrence of any class. We alwys want these.
+        /// 
+        /// Next we may (or may not) have a list of classes that may (or may not) be duplicates of the first occurrence
+        /// class. For example, assume we have a first occurrence class called "Wombat". Nested clases may have been
+        /// generated called "Womnats2" or "Wombats3". All three classes may have the same content, so we need to 
+        /// discard the copy classes and replace any references to them with the original Wonbats class.
+        /// 
+        /// This is fun.
+        /// 
+        /// </remarks>
+        private void DeDuplicateClasses()
+        {
+            // Get the first occurrence classes (original name = assigned name) as we always want these
+            var newTypes = (from tt in Types
+                where string.Compare(tt.OriginalName, tt.AssignedName, StringComparison.InvariantCultureIgnoreCase) == 0
+                select tt).ToList();
+
+            // If we replace references to classes (Say "Wombats2" with "Womnbats", we need to know it has 
+            // happen4ed and we need to fix the fields. This is the list of translations.
+            var typeNameReplacements = new Dictionary<string, string>();
+
+            // Get the potential duplicate classes. These are classes where the class name does not match
+            // the original name (i.e. we added a count to it).
+            var possibleDuplicates = from tt in Types
+                where string.Compare(tt.OriginalName, tt.AssignedName, StringComparison.InvariantCultureIgnoreCase) != 0
+                select tt;
+
+            try
+            {
+                // Check the dupliates to see if they are the same as the first occurrence classes. Add to the first
+                // occurrence list if  they are different or create field fixup's if they are the same. We are very
+                // simplistic in testing for the "same" or "different". Do they hae the same number of fields and
+                // are the field names the same. (Note, cannot use field types as these may be one of our classes that
+                // we are foing to replace e.g. Wombats2 that will be replaced with Wombats).
+                foreach (var duplicate in possibleDuplicates)
+                {
+                    var original = newTypes.FirstOrDefault(tt => tt.OriginalName == duplicate.OriginalName);
+                    
+                    if (FirstOccurrenceClassNotFound(original)
+                        || FieldCountsAreDifferent(original, duplicate)
+                        || FieldNamesAreDifferent(original, duplicate))
+                    {
+                        newTypes.Add(duplicate);
+                        continue;
+                    }
+
+                    // Two objects are the 'same', so we want to replace the duplicate with the original. We will
+                    // need to fix-up the field types when we are done.
+                    typeNameReplacements.Add(duplicate.AssignedName, original.AssignedName);
+                }
+
+                // We now need to apply our class name translations to the new base types list. So, something that
+                // might currently be referring to Wombats2 wil be changed to refer to Wombats.
+                foreach (var jsonType in newTypes)
+                {
+                    foreach (var field in jsonType.Fields)
+                    {
+                        var internalTypeName = GetInternalTypeName(field);
+                        if (internalTypeName != null && typeNameReplacements.ContainsKey(internalTypeName))
+                        {
+                            field.Type.InternalType.AssignName(typeNameReplacements[internalTypeName], typeNameReplacements[internalTypeName]);
+                        }
+                    }
+                }
+
+                // Replace the previous type list with the new type list
+                Types.Clear();
+                newTypes.ForEach(tt => Types.Add(tt));
+            }
+            catch(Exception ex)
+            {
+                // Worst case scenario - deduplication failed, so generate all the classes.
+                Debug.Print($"Deduplication failed:\r\n\n{ex.Message}\r\n\r\n{ex.StackTrace}");
+            }
+        }
+
+        private string GetInternalTypeName(FieldInfo field)
+        {
+            // Sorry about this, but we can get nulls at all sorts of levels. Quite irritating really. So we have to
+            // check all the way down to get the assigned name. Returns blank if we fail at any point.
+            return field?.Type?.InternalType?.AssignedName;
+        }
+
+        private bool FirstOccurrenceClassNotFound(JsonType original) { return original == null; }
+        private bool FieldCountsAreDifferent(JsonType original, JsonType duplicate) { return original.Fields.Count != duplicate.Fields.Count; }
+        private bool FieldNamesAreDifferent(JsonType original, JsonType duplicate)
+            { return GetFieldDifferences(original.Fields, duplicate.Fields, fld => fld.MemberName).Count() != 0; }
+
+        public IEnumerable<string> GetFieldDifferences(IEnumerable<FieldInfo> source, IEnumerable<FieldInfo> other, Func<FieldInfo, string> keySelector)
+        {
+            var setSource = new HashSet<string>(source.Select(keySelector));
+            var setOther = new HashSet<string>(other.Select(keySelector));
+
+            return setSource.Except(setOther);
         }
 
         private void WriteClassesToFile(string path, IEnumerable<JsonType> types)
@@ -215,7 +324,7 @@ namespace Xamasoft.JsonClassGenerator
                         }
                     }
 
-                    fieldType.AssignName(CreateUniqueClassName(field.Key));
+                    fieldType.AssignName(CreateUniqueClassName(field.Key), field.Key);
                     GenerateClass(subexamples.ToArray(), fieldType);
                 }
 
@@ -248,12 +357,21 @@ namespace Xamasoft.JsonClassGenerator
                         }
                     }
 
-                    field.Value.InternalType.AssignName(CreateUniqueClassNameFromPlural(field.Key));
+                    field.Value.InternalType.AssignName(CreateUniqueClassNameFromPlural(field.Key), 
+                            ConvertPluralToSingle(field.Key));
                     GenerateClass(subexamples.ToArray(), field.Value.InternalType);
                 }
             }
 
             type.Fields = jsonFields.Select(x => new FieldInfo(this, x.Key, x.Value, UsePascalCase, fieldExamples[x.Key])).ToArray();
+
+            // TODO: Does a copy of this class already exist?
+            
+            foreach (JsonType jsonType in Types)
+            {
+                Debug.Print(jsonType.AssignedName);
+            }
+
 
             Types.Add(type);
 
@@ -282,6 +400,12 @@ namespace Xamasoft.JsonClassGenerator
         {
             plural = ToTitleCase(plural);
             return CreateUniqueClassName(pluralizationService.Singularize(plural));
+        }
+
+        private string ConvertPluralToSingle(string plural)
+        {
+            plural = ToTitleCase(plural);
+            return pluralizationService.Singularize(plural);
         }
 
 
