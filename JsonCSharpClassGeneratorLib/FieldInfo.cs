@@ -3,11 +3,13 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 
 namespace Xamasoft.JsonClassGenerator
 {
+    [DebuggerDisplay("MemberName = {MemberName}/{JsonMemberName}")]
     public class FieldInfo
     {
 

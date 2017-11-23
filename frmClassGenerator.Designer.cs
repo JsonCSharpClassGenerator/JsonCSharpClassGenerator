@@ -87,6 +87,7 @@
             this.edtJson = new EasyScintilla.SimpleEditor();
             this.lblPosition = new System.Windows.Forms.Label();
             this.chkDeduplicate = new System.Windows.Forms.CheckBox();
+            this.feedbackLabel = new System.Windows.Forms.Label();
             this.flowLayoutPanel1.SuspendLayout();
             this.flowLayoutPanel2.SuspendLayout();
             this.flowLayoutPanel3.SuspendLayout();
@@ -660,11 +661,22 @@
             this.chkDeduplicate.Text = "De-duplicate classes";
             this.chkDeduplicate.UseVisualStyleBackColor = true;
             // 
+            // feedbackLabel
+            // 
+            this.feedbackLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.feedbackLabel.Location = new System.Drawing.Point(15, 590);
+            this.feedbackLabel.Name = "feedbackLabel";
+            this.feedbackLabel.Size = new System.Drawing.Size(532, 29);
+            this.feedbackLabel.TabIndex = 46;
+            this.feedbackLabel.Text = "0 / 0";
+            this.feedbackLabel.Visible = false;
+            // 
             // frmCSharpClassGeneration
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(766, 628);
+            this.Controls.Add(this.feedbackLabel);
             this.Controls.Add(this.chkDeduplicate);
             this.Controls.Add(this.lblPosition);
             this.Controls.Add(this.edtJson);
@@ -778,6 +790,7 @@
         private EasyScintilla.SimpleEditor edtJson;
         private System.Windows.Forms.Label lblPosition;
         private System.Windows.Forms.CheckBox chkDeduplicate;
+        private System.Windows.Forms.Label feedbackLabel;
     }
 }
 

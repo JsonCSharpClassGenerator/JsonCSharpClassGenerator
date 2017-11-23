@@ -39,6 +39,8 @@ namespace Xamasoft.JsonClassGenerator
 
         private PluralizationService pluralizationService = PluralizationService.CreateService(new CultureInfo("en-us"));
 
+        public Action<string> FeedBack { get; set; }
+
         private bool used = false;
         public bool UseNamespaces { get { return Namespace != null; } }
 
@@ -84,9 +86,11 @@ namespace Xamasoft.JsonClassGenerator
 
             if (DeduplicateClasses)
             {
+                FeedBack?.Invoke("De-duplicating classes");
                 DeDuplicateClasses();
             }
 
+            FeedBack?.Invoke("Writing classes to disk.");
             if (writeToDisk)
             {
 
@@ -167,13 +171,14 @@ namespace Xamasoft.JsonClassGenerator
                 {
                     var original = newTypes.FirstOrDefault(tt => tt.OriginalName == duplicate.OriginalName);
                     
-                    if (FirstOccurrenceClassNotFound(original)
-                        || FieldCountsAreDifferent(original, duplicate)
-                        || FieldNamesAreDifferent(original, duplicate))
+                    if (FirstOccurrenceClassNotFound(original))
                     {
                         newTypes.Add(duplicate);
                         continue;
                     }
+
+                    // Classes are the same - Merge the fields
+                    MergeFieldFromDuplicateToOriginal(original, duplicate);
 
                     // Two objects are the 'same', so we want to replace the duplicate with the original. We will
                     // need to fix-up the field types when we are done.
@@ -191,6 +196,12 @@ namespace Xamasoft.JsonClassGenerator
                         {
                             field.Type.InternalType.AssignName(typeNameReplacements[internalTypeName], typeNameReplacements[internalTypeName]);
                         }
+
+                        var typeName = GetTypeName(field);
+                        if (typeName != null && typeNameReplacements.ContainsKey(typeName))
+                        {
+                            field.Type.AssignName(typeNameReplacements[typeName], typeNameReplacements[typeName]);
+                        }
                     }
                 }
 
@@ -205,6 +216,15 @@ namespace Xamasoft.JsonClassGenerator
             }
         }
 
+        private void MergeFieldFromDuplicateToOriginal(JsonType original, JsonType duplicate)
+        {
+            var fieldDifferences = GetFieldDifferences(original.Fields, duplicate.Fields, x => x.MemberName);
+            foreach (var fieldDifference in fieldDifferences)
+            {
+                original.Fields.Add(duplicate.Fields.First(fld => fld.MemberName == fieldDifference));
+            }
+        }
+
         private string GetInternalTypeName(FieldInfo field)
         {
             // Sorry about this, but we can get nulls at all sorts of levels. Quite irritating really. So we have to
@@ -212,21 +232,26 @@ namespace Xamasoft.JsonClassGenerator
             return field?.Type?.InternalType?.AssignedName;
         }
 
+        private string GetTypeName(FieldInfo field)
+        {
+            // Sorry about this, but we can get nulls at all sorts of levels. Quite irritating really. So we have to
+            // check all the way down to get the assigned name. Returns blank if we fail at any point.
+            return field?.Type?.AssignedName;
+        }
+
         private bool FirstOccurrenceClassNotFound(JsonType original) { return original == null; }
-        private bool FieldCountsAreDifferent(JsonType original, JsonType duplicate) { return original.Fields.Count != duplicate.Fields.Count; }
-        private bool FieldNamesAreDifferent(JsonType original, JsonType duplicate)
-            { return GetFieldDifferences(original.Fields, duplicate.Fields, fld => fld.MemberName).Count() != 0; }
 
         public IEnumerable<string> GetFieldDifferences(IEnumerable<FieldInfo> source, IEnumerable<FieldInfo> other, Func<FieldInfo, string> keySelector)
         {
             var setSource = new HashSet<string>(source.Select(keySelector));
             var setOther = new HashSet<string>(other.Select(keySelector));
 
-            return setSource.Except(setOther);
+            return setOther.Except(setSource);
         }
 
         private void WriteClassesToFile(string path, IEnumerable<JsonType> types)
         {
+            FeedBack?.Invoke($"Writing {path}");
             using (var sw = new StreamWriter(path, false, Encoding.UTF8))
             {
                 WriteClassesToFile(sw, types);
@@ -363,18 +388,10 @@ namespace Xamasoft.JsonClassGenerator
                 }
             }
 
-            type.Fields = jsonFields.Select(x => new FieldInfo(this, x.Key, x.Value, UsePascalCase, fieldExamples[x.Key])).ToArray();
+            type.Fields = jsonFields.Select(x => new FieldInfo(this, x.Key, x.Value, UsePascalCase, fieldExamples[x.Key])).ToList();
 
-            // TODO: Does a copy of this class already exist?
-            
-            foreach (JsonType jsonType in Types)
-            {
-                Debug.Print(jsonType.AssignedName);
-            }
-
-
+            FeedBack?.Invoke($"Generating class {type.AssignedName}");
             Types.Add(type);
-
         }
 
         public IList<JsonType> Types { get; private set; }

@@ -126,6 +126,8 @@ namespace Xamasoft.JsonClassGenerator.UI
             if (gen == null) return;
             try
             {
+                feedbackLabel.Visible = true;
+                gen.FeedBack = GetFeedback;
                 gen.GenerateClasses();
                 messageTimer.Stop();
                 lblDone.Visible = true;
@@ -134,8 +136,21 @@ namespace Xamasoft.JsonClassGenerator.UI
             }
             catch (Exception ex)
             {
-                MessageBox.Show(this, "Unable to generate the code: " + ex.Message, this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(this, "Unable to generate the code: " + ex.Message, this.Text, MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
             }
+            finally
+            {
+                feedbackLabel.Visible = false;
+                gen.FeedBack = null;
+            }
+
+        }
+
+        private void GetFeedback(string feedbackMessage)
+        {
+            feedbackLabel.Text = feedbackMessage;
+            feedbackLabel.Refresh();
         }
 
         private string lastGeneratedString;
