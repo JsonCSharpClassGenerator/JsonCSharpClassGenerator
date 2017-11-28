@@ -86,6 +86,8 @@
             this.saveDlg = new System.Windows.Forms.SaveFileDialog();
             this.edtJson = new EasyScintilla.SimpleEditor();
             this.lblPosition = new System.Windows.Forms.Label();
+            this.chkDeduplicate = new System.Windows.Forms.CheckBox();
+            this.feedbackLabel = new System.Windows.Forms.Label();
             this.flowLayoutPanel1.SuspendLayout();
             this.flowLayoutPanel2.SuspendLayout();
             this.flowLayoutPanel3.SuspendLayout();
@@ -95,7 +97,7 @@
             // btnGenerate
             // 
             this.btnGenerate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnGenerate.Location = new System.Drawing.Point(644, 593);
+            this.btnGenerate.Location = new System.Drawing.Point(658, 593);
             this.btnGenerate.Name = "btnGenerate";
             this.btnGenerate.Size = new System.Drawing.Size(96, 23);
             this.btnGenerate.TabIndex = 17;
@@ -417,7 +419,7 @@
             this.lblDone.AutoSize = true;
             this.lblDone.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblDone.ForeColor = System.Drawing.Color.Green;
-            this.lblDone.Location = new System.Drawing.Point(421, 598);
+            this.lblDone.Location = new System.Drawing.Point(435, 598);
             this.lblDone.Name = "lblDone";
             this.lblDone.Size = new System.Drawing.Size(39, 13);
             this.lblDone.TabIndex = 38;
@@ -428,7 +430,7 @@
             // 
             this.lnkOpenFolder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.lnkOpenFolder.AutoSize = true;
-            this.lnkOpenFolder.Location = new System.Drawing.Point(466, 598);
+            this.lnkOpenFolder.Location = new System.Drawing.Point(480, 598);
             this.lnkOpenFolder.Name = "lnkOpenFolder";
             this.lnkOpenFolder.Size = new System.Drawing.Size(62, 13);
             this.lnkOpenFolder.TabIndex = 39;
@@ -445,7 +447,7 @@
             // btnPasteAndGo
             // 
             this.btnPasteAndGo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnPasteAndGo.Location = new System.Drawing.Point(542, 593);
+            this.btnPasteAndGo.Location = new System.Drawing.Point(556, 593);
             this.btnPasteAndGo.Name = "btnPasteAndGo";
             this.btnPasteAndGo.Size = new System.Drawing.Size(96, 23);
             this.btnPasteAndGo.TabIndex = 16;
@@ -459,7 +461,7 @@
             this.lblDoneClipboard.AutoSize = true;
             this.lblDoneClipboard.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblDoneClipboard.ForeColor = System.Drawing.Color.Green;
-            this.lblDoneClipboard.Location = new System.Drawing.Point(345, 598);
+            this.lblDoneClipboard.Location = new System.Drawing.Point(359, 598);
             this.lblDoneClipboard.Name = "lblDoneClipboard";
             this.lblDoneClipboard.Size = new System.Drawing.Size(183, 13);
             this.lblDoneClipboard.TabIndex = 38;
@@ -482,7 +484,7 @@
             this.chkSortMembers.Checked = global::Xamasoft.JsonClassGenerator.UI.Properties.Settings.Default.SortMemberFields;
             this.chkSortMembers.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkSortMembers.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::Xamasoft.JsonClassGenerator.UI.Properties.Settings.Default, "SortMemberFields", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.chkSortMembers.Location = new System.Drawing.Point(349, 223);
+            this.chkSortMembers.Location = new System.Drawing.Point(621, 85);
             this.chkSortMembers.Name = "chkSortMembers";
             this.chkSortMembers.Size = new System.Drawing.Size(112, 17);
             this.chkSortMembers.TabIndex = 41;
@@ -497,7 +499,7 @@
             this.helpToolStripMenuItem});
             this.MainMenu.Location = new System.Drawing.Point(0, 0);
             this.MainMenu.Name = "MainMenu";
-            this.MainMenu.Size = new System.Drawing.Size(752, 24);
+            this.MainMenu.Size = new System.Drawing.Size(766, 24);
             this.MainMenu.TabIndex = 42;
             this.MainMenu.Text = "menuStrip1";
             // 
@@ -630,7 +632,7 @@
             this.edtJson.IndentationGuides = ScintillaNET.IndentView.LookBoth;
             this.edtJson.Location = new System.Drawing.Point(15, 276);
             this.edtJson.Name = "edtJson";
-            this.edtJson.Size = new System.Drawing.Size(725, 311);
+            this.edtJson.Size = new System.Drawing.Size(739, 311);
             this.edtJson.Styler = null;
             this.edtJson.TabIndex = 43;
             this.edtJson.KeyDown += new System.Windows.Forms.KeyEventHandler(this.edtJson_KeyDown);
@@ -647,11 +649,35 @@
             this.lblPosition.TabIndex = 44;
             this.lblPosition.Text = "0 / 0";
             // 
+            // chkDeduplicate
+            // 
+            this.chkDeduplicate.AutoSize = true;
+            this.chkDeduplicate.Checked = global::Xamasoft.JsonClassGenerator.UI.Properties.Settings.Default.DeDuplicateClasses;
+            this.chkDeduplicate.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::Xamasoft.JsonClassGenerator.UI.Properties.Settings.Default, "DeDuplicateClasses", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.chkDeduplicate.Location = new System.Drawing.Point(621, 106);
+            this.chkDeduplicate.Name = "chkDeduplicate";
+            this.chkDeduplicate.Size = new System.Drawing.Size(124, 17);
+            this.chkDeduplicate.TabIndex = 45;
+            this.chkDeduplicate.Text = "De-duplicate classes";
+            this.chkDeduplicate.UseVisualStyleBackColor = true;
+            // 
+            // feedbackLabel
+            // 
+            this.feedbackLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.feedbackLabel.Location = new System.Drawing.Point(15, 590);
+            this.feedbackLabel.Name = "feedbackLabel";
+            this.feedbackLabel.Size = new System.Drawing.Size(532, 29);
+            this.feedbackLabel.TabIndex = 46;
+            this.feedbackLabel.Text = "0 / 0";
+            this.feedbackLabel.Visible = false;
+            // 
             // frmCSharpClassGeneration
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(752, 628);
+            this.ClientSize = new System.Drawing.Size(766, 628);
+            this.Controls.Add(this.feedbackLabel);
+            this.Controls.Add(this.chkDeduplicate);
             this.Controls.Add(this.lblPosition);
             this.Controls.Add(this.edtJson);
             this.Controls.Add(this.chkSortMembers);
@@ -763,6 +789,8 @@
         private System.Windows.Forms.ToolStripMenuItem closeJsonFileMenuItem;
         private EasyScintilla.SimpleEditor edtJson;
         private System.Windows.Forms.Label lblPosition;
+        private System.Windows.Forms.CheckBox chkDeduplicate;
+        private System.Windows.Forms.Label feedbackLabel;
     }
 }
 

@@ -36,6 +36,7 @@
             this.btnSendFeedback = new System.Windows.Forms.Button();
             this.btnCheckUpdates = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.githubLink = new Xamasoft.Controls.BetterLinkLabel();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -55,7 +56,7 @@
             this.linkLabel1.AutoSize = true;
             this.linkLabel1.Location = new System.Drawing.Point(23, 124);
             this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.Size = new System.Drawing.Size(264, 13);
+            this.linkLabel1.Size = new System.Drawing.Size(229, 13);
             this.linkLabel1.TabIndex = 0;
             this.linkLabel1.TabStop = true;
             this.linkLabel1.Text = "http://www.xamasoft.com/json-class-generator";
@@ -111,6 +112,17 @@
             this.pictureBox1.TabIndex = 1;
             this.pictureBox1.TabStop = false;
             // 
+            // githubLink
+            // 
+            this.githubLink.AutoSize = true;
+            this.githubLink.Location = new System.Drawing.Point(23, 146);
+            this.githubLink.Name = "githubLink";
+            this.githubLink.Size = new System.Drawing.Size(363, 13);
+            this.githubLink.TabIndex = 5;
+            this.githubLink.TabStop = true;
+            this.githubLink.Text = "https://github.com/JsonCSharpClassGenerator/JsonCSharpClassGenerator";
+            this.githubLink.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.githubLink_LinkClicked);
+            // 
             // frmAbout
             // 
             this.AcceptButton = this.btnOK;
@@ -119,6 +131,7 @@
             this.BackColor = System.Drawing.Color.White;
             this.CancelButton = this.btnOK;
             this.ClientSize = new System.Drawing.Size(445, 216);
+            this.Controls.Add(this.githubLink);
             this.Controls.Add(this.btnCheckUpdates);
             this.Controls.Add(this.btnSendFeedback);
             this.Controls.Add(this.label1);
@@ -149,5 +162,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnSendFeedback;
         private System.Windows.Forms.Button btnCheckUpdates;
+        private Controls.BetterLinkLabel githubLink;
     }
 }

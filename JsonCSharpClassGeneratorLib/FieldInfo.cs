@@ -3,11 +3,13 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 
 namespace Xamasoft.JsonClassGenerator
 {
+    [DebuggerDisplay("MemberName = {MemberName}/{JsonMemberName}")]
     public class FieldInfo
     {
 
@@ -25,6 +27,12 @@ namespace Xamasoft.JsonClassGenerator
         public string JsonMemberName { get; private set; }
         public JsonType Type { get; private set; }
         public IList<object> Examples { get; private set; }
+
+        public void UpdateMemberName(string newMemberName)
+        {
+            MemberName = newMemberName;
+            JsonMemberName = newMemberName;
+        }
 
         public string GetGenerationCode(string jobject)
         {

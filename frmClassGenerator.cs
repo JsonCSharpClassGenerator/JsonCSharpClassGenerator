@@ -71,6 +71,7 @@ namespace Xamasoft.JsonClassGenerator.UI
             settings.Language = cmbLanguage.SelectedItem.GetType().Name;
             settings.SingleFile = chkSingleFile.Checked;
             settings.DocumentationExamples = chkDocumentationExamples.Checked;
+            settings.DeDuplicateClasses = chkDeduplicate.Checked;
             settings.Save();
         }
 
@@ -88,6 +89,7 @@ namespace Xamasoft.JsonClassGenerator.UI
             cmbLanguage.SelectedIndex = langIndex != -1 ? langIndex : 0;
             chkSingleFile.Checked = settings.SingleFile;
             chkDocumentationExamples.Checked = settings.DocumentationExamples;
+            chkDeduplicate.Checked = settings.DeDuplicateClasses;
             UpdateStatus();
         }
 
@@ -124,6 +126,8 @@ namespace Xamasoft.JsonClassGenerator.UI
             if (gen == null) return;
             try
             {
+                feedbackLabel.Visible = true;
+                gen.FeedBack = GetFeedback;
                 gen.GenerateClasses();
                 messageTimer.Stop();
                 lblDone.Visible = true;
@@ -132,8 +136,21 @@ namespace Xamasoft.JsonClassGenerator.UI
             }
             catch (Exception ex)
             {
-                MessageBox.Show(this, "Unable to generate the code: " + ex.Message, this.Text, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(this, "Unable to generate the code: " + ex.Message, this.Text, MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
             }
+            finally
+            {
+                feedbackLabel.Visible = false;
+                gen.FeedBack = null;
+            }
+
+        }
+
+        private void GetFeedback(string feedbackMessage)
+        {
+            feedbackLabel.Text = feedbackMessage;
+            feedbackLabel.Refresh();
         }
 
         private string lastGeneratedString;
@@ -192,23 +209,27 @@ namespace Xamasoft.JsonClassGenerator.UI
                 return null;
             }
 
-            var gen = new JsonClassGenerator();
-            gen.Example = edtJson.Text;
-            gen.InternalVisibility = radInternal.Checked;
-            gen.CodeWriter = (ICodeWriter)cmbLanguage.SelectedItem;
+            var gen = new JsonClassGenerator
+            {
+                Example = edtJson.Text,
+                InternalVisibility = radInternal.Checked,
+                CodeWriter = (ICodeWriter) cmbLanguage.SelectedItem,
+                DeduplicateClasses = chkDeduplicate.Checked,
+                TargetFolder = edtTargetFolder.Text,
+                UseProperties = radProperties.Checked,
+                MainClass = edtMainClass.Text,
+                SortMemberFields = chkSortMembers.Checked,
+                UsePascalCase = chkPascalCase.Checked,
+                UseNestedClasses = radNestedClasses.Checked,
+                ApplyObfuscationAttributes = chkApplyObfuscationAttributes.Checked,
+                SingleFile = chkSingleFile.Checked,
+                ExamplesInDocumentation = chkDocumentationExamples.Checked,
+                Namespace = string.IsNullOrEmpty(edtNamespace.Text) ? null : edtNamespace.Text,
+                NoHelperClass = chkNoHelper.Checked,
+                SecondaryNamespace = radDifferentNamespace.Checked && !string.IsNullOrEmpty(edtSecondaryNamespace.Text) ? edtSecondaryNamespace.Text : null,
+            };
             gen.ExplicitDeserialization = chkExplicitDeserialization.Checked && gen.CodeWriter is CSharpCodeWriter;
-            gen.Namespace = string.IsNullOrEmpty(edtNamespace.Text) ? null : edtNamespace.Text;
-            gen.NoHelperClass = chkNoHelper.Checked;
-            gen.SecondaryNamespace = radDifferentNamespace.Checked && !string.IsNullOrEmpty(edtSecondaryNamespace.Text) ? edtSecondaryNamespace.Text : null;
-            gen.TargetFolder = edtTargetFolder.Text;
-            gen.UseProperties = radProperties.Checked;
-            gen.MainClass = edtMainClass.Text;
-            gen.SortMemberFields = chkSortMembers.Checked;
-            gen.UsePascalCase = chkPascalCase.Checked;
-            gen.UseNestedClasses = radNestedClasses.Checked;
-            gen.ApplyObfuscationAttributes = chkApplyObfuscationAttributes.Checked;
-            gen.SingleFile = chkSingleFile.Checked;
-            gen.ExamplesInDocumentation = chkDocumentationExamples.Checked;
+
             return gen;
         }
 
