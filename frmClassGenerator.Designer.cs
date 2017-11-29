@@ -88,6 +88,8 @@
             this.lblPosition = new System.Windows.Forms.Label();
             this.chkDeduplicate = new System.Windows.Forms.CheckBox();
             this.feedbackLabel = new System.Windows.Forms.Label();
+            this.btnCompact = new System.Windows.Forms.Button();
+            this.btnBeautify = new System.Windows.Forms.Button();
             this.flowLayoutPanel1.SuspendLayout();
             this.flowLayoutPanel2.SuspendLayout();
             this.flowLayoutPanel3.SuspendLayout();
@@ -671,11 +673,33 @@
             this.feedbackLabel.Text = "0 / 0";
             this.feedbackLabel.Visible = false;
             // 
+            // btnCompact
+            // 
+            this.btnCompact.Location = new System.Drawing.Point(115, 593);
+            this.btnCompact.Name = "btnCompact";
+            this.btnCompact.Size = new System.Drawing.Size(60, 23);
+            this.btnCompact.TabIndex = 50;
+            this.btnCompact.Text = "&Compact";
+            this.btnCompact.UseVisualStyleBackColor = true;
+            this.btnCompact.Click += new System.EventHandler(this.btnCompact_Click);
+            // 
+            // btnBeautify
+            // 
+            this.btnBeautify.Location = new System.Drawing.Point(51, 593);
+            this.btnBeautify.Name = "btnBeautify";
+            this.btnBeautify.Size = new System.Drawing.Size(60, 23);
+            this.btnBeautify.TabIndex = 49;
+            this.btnBeautify.Text = "&Beautify";
+            this.btnBeautify.UseVisualStyleBackColor = true;
+            this.btnBeautify.Click += new System.EventHandler(this.btnBeautify_Click);
+            // 
             // frmCSharpClassGeneration
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(766, 628);
+            this.Controls.Add(this.btnCompact);
+            this.Controls.Add(this.btnBeautify);
             this.Controls.Add(this.feedbackLabel);
             this.Controls.Add(this.chkDeduplicate);
             this.Controls.Add(this.lblPosition);
@@ -791,6 +815,8 @@
         private System.Windows.Forms.Label lblPosition;
         private System.Windows.Forms.CheckBox chkDeduplicate;
         private System.Windows.Forms.Label feedbackLabel;
+        private System.Windows.Forms.Button btnCompact;
+        private System.Windows.Forms.Button btnBeautify;
     }
 }
 

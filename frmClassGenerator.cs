@@ -6,7 +6,10 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
+
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+
 using Xamasoft.JsonClassGenerator.CodeWriters;
 using Xamasoft.JsonClassGenerator.UI.Helpers;
 using Xamasoft.JsonClassGenerator.UI.Properties;
@@ -464,6 +467,18 @@ namespace Xamasoft.JsonClassGenerator.UI
         private void UpdateCursorPosition()
         {
             lblPosition.Text = $"{edtJson.CurrentLine + 1}/{edtJson.GetColumn(edtJson.CurrentPosition) + 1}";
+        }
+
+        private void btnBeautify_Click(object sender, EventArgs e)
+        {
+            dynamic parsedJson = JsonConvert.DeserializeObject(edtJson.Text);
+            edtJson.Text = JsonConvert.SerializeObject(parsedJson, Formatting.Indented);
+        }
+
+        private void btnCompact_Click(object sender, EventArgs e)
+        {
+            dynamic parsedJson = JsonConvert.DeserializeObject(edtJson.Text);
+            edtJson.Text = JsonConvert.SerializeObject(parsedJson, Formatting.None);
         }
 
 
