@@ -675,6 +675,7 @@
             // 
             // btnCompact
             // 
+            this.btnCompact.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnCompact.Location = new System.Drawing.Point(115, 593);
             this.btnCompact.Name = "btnCompact";
             this.btnCompact.Size = new System.Drawing.Size(60, 23);
@@ -685,6 +686,7 @@
             // 
             // btnBeautify
             // 
+            this.btnBeautify.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnBeautify.Location = new System.Drawing.Point(51, 593);
             this.btnBeautify.Name = "btnBeautify";
             this.btnBeautify.Size = new System.Drawing.Size(60, 23);
