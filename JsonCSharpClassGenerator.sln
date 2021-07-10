@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JsonClassGenerator", "JsonClassGenerator.csproj", "{A7442683-2415-4DD4-9C52-824F7AF89ABC}"
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31423.177
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JsonClassGeneratorLib", "JsonCSharpClassGeneratorLib\JsonClassGeneratorLib.csproj", "{7BEF7EAA-DE37-40FB-BD33-3DEF0685031F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JsonClassGeneratorLib", "JsonCSharpClassGeneratorLib\JsonClassGeneratorLib.csproj", "{7BEF7EAA-DE37-40FB-BD33-3DEF0685031F}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JsonClassGeneratorConsole", "JsonClassGeneratorConsole\JsonClassGeneratorConsole.csproj", "{64B9000F-D996-4B46-A61E-398DC1CB90A5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JsonClassGeneratorConsole", "JsonClassGeneratorConsole\JsonClassGeneratorConsole.csproj", "{64B9000F-D996-4B46-A61E-398DC1CB90A5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,16 +17,6 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{A7442683-2415-4DD4-9C52-824F7AF89ABC}.Debug|Any CPU.ActiveCfg = Debug|x86
-		{A7442683-2415-4DD4-9C52-824F7AF89ABC}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
-		{A7442683-2415-4DD4-9C52-824F7AF89ABC}.Debug|Mixed Platforms.Build.0 = Debug|x86
-		{A7442683-2415-4DD4-9C52-824F7AF89ABC}.Debug|x86.ActiveCfg = Debug|x86
-		{A7442683-2415-4DD4-9C52-824F7AF89ABC}.Debug|x86.Build.0 = Debug|x86
-		{A7442683-2415-4DD4-9C52-824F7AF89ABC}.Release|Any CPU.ActiveCfg = Release|x86
-		{A7442683-2415-4DD4-9C52-824F7AF89ABC}.Release|Mixed Platforms.ActiveCfg = Release|x86
-		{A7442683-2415-4DD4-9C52-824F7AF89ABC}.Release|Mixed Platforms.Build.0 = Release|x86
-		{A7442683-2415-4DD4-9C52-824F7AF89ABC}.Release|x86.ActiveCfg = Release|x86
-		{A7442683-2415-4DD4-9C52-824F7AF89ABC}.Release|x86.Build.0 = Release|x86
 		{7BEF7EAA-DE37-40FB-BD33-3DEF0685031F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{7BEF7EAA-DE37-40FB-BD33-3DEF0685031F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7BEF7EAA-DE37-40FB-BD33-3DEF0685031F}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
@@ -50,5 +40,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7CA813AF-5C0A-4460-8B67-5F30786D6E6C}
 	EndGlobalSection
 EndGlobal

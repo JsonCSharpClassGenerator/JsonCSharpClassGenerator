@@ -1,0 +1,144 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <ProjectGuid>{A7442683-2415-4DD4-9C52-824F7AF89ABC}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>Xamasoft.JsonClassGenerator.UI</RootNamespace>
+    <AssemblyName>JsonCSharpClassGenerator</AssemblyName>
+    <TargetFramework>net452</TargetFramework>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <AssemblyTitle>Json Class Generator</AssemblyTitle>
+    <Company>Xamasoft</Company>
+    <Product>Json Class Generator</Product>
+    <Copyright>Copyright © Xamasoft 2010 - 2013</Copyright>
+    <AssemblyVersion>1.6.1.0</AssemblyVersion>
+    <FileVersion>1.6.1.0</FileVersion>
+    <OutputPath>bin\$(Configuration)\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <DebugType>full</DebugType>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <DebugType>pdbonly</DebugType>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>json-csharp-icon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="EasyScintilla" Version="1.0.3" />
+    <PackageReference Include="jacobslusser.ScintillaNET" Version="3.6.3" />
+    <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="EasyScintilla, Version=1.0.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\EasyScintilla.1.0.3\lib\net40\EasyScintilla.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="ScintillaNET, Version=3.6.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\jacobslusser.ScintillaNET.3.6.3\lib\net40\ScintillaNET.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Data.Entity.Design.PluralizationServices, Version=4.0.0.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>References\System.Data.Entity.Design.PluralizationServices.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="Xamasoft.BetterLinkLabel">
+      <HintPath>References\Xamasoft.BetterLinkLabel.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="frmAbout.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="frmAbout.Designer.cs">
+      <DependentUpon>frmAbout.cs</DependentUpon>
+    </Compile>
+    <Compile Update="frmClassGenerator.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="frmClassGenerator.Designer.cs">
+      <DependentUpon>frmClassGenerator.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Properties\Settings1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <EmbeddedResource Update="frmAbout.resx">
+      <DependentUpon>frmAbout.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Update="frmClassGenerator.resx">
+      <DependentUpon>frmClassGenerator.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings1.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\help.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="json-csharp-icon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="JsonCSharpClassGeneratorLib\JsonClassGeneratorLib.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="JsonClassGeneratorConsole\Program.cs" />
+    <Compile Remove="JsonCSharpClassGeneratorLib\FieldInfo.cs" />
+    <Compile Remove="JsonCSharpClassGeneratorLib\ICodeWriter.cs" />
+    <Compile Remove="JsonCSharpClassGeneratorLib\IJsonClassGeneratorConfig.cs" />
+    <Compile Remove="JsonCSharpClassGeneratorLib\JsonClassGenerator.cs" />
+    <Compile Remove="JsonCSharpClassGeneratorLib\JsonClassHelper.cs" />
+    <Compile Remove="JsonCSharpClassGeneratorLib\JsonType.cs" />
+    <Compile Remove="JsonCSharpClassGeneratorLib\JsonTypeEnum.cs" />
+    <Compile Remove="JsonClassGeneratorConsole\Properties\AssemblyInfo.cs" />
+    <Compile Remove="JsonCSharpClassGeneratorLib\CodeWriters\CSharpCodeWriter.cs" />
+    <Compile Remove="JsonCSharpClassGeneratorLib\CodeWriters\JavaCodeWriter.cs" />
+    <Compile Remove="JsonCSharpClassGeneratorLib\CodeWriters\TypeScriptCodeWriter.cs" />
+    <Compile Remove="JsonCSharpClassGeneratorLib\CodeWriters\VisualBasicCodeWriter.cs" />
+    <Compile Remove="JsonCSharpClassGeneratorLib\Properties\AssemblyInfo.cs" />
+    <Compile Remove="JsonCSharpClassGeneratorLib\Properties\Resources.Designer.cs" />
+  </ItemGroup>
+</Project>

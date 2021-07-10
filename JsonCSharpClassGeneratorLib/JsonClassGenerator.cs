@@ -7,11 +7,10 @@ using System.Text;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.IO;
-using System.Data.Entity.Design.PluralizationServices;
 using System.Diagnostics;
 using System.Globalization;
 using Xamasoft.JsonClassGenerator.CodeWriters;
-
+using PluralizeService.Core;
 
 namespace Xamasoft.JsonClassGenerator
 {
@@ -36,8 +35,6 @@ namespace Xamasoft.JsonClassGenerator
         public bool AlwaysUseNullableValues { get; set; }
         public bool ExamplesInDocumentation { get; set; }
         public bool DeduplicateClasses { get; set; }
-
-        private PluralizationService pluralizationService = PluralizationService.CreateService(new CultureInfo("en-us"));
 
         public Action<string> FeedBack { get; set; }
 
@@ -416,13 +413,13 @@ namespace Xamasoft.JsonClassGenerator
         private string CreateUniqueClassNameFromPlural(string plural)
         {
             plural = ToTitleCase(plural);
-            return CreateUniqueClassName(pluralizationService.Singularize(plural));
+            return CreateUniqueClassName(PluralizationProvider.Singularize(plural));
         }
 
         private string ConvertPluralToSingle(string plural)
         {
             plural = ToTitleCase(plural);
-            return pluralizationService.Singularize(plural);
+            return PluralizationProvider.Singularize(plural);
         }
 
 
