@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31423.177
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JsonClassGeneratorLib", "JsonCSharpClassGeneratorLib\JsonClassGeneratorLib.csproj", "{7BEF7EAA-DE37-40FB-BD33-3DEF0685031F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JsonClassGenerator", "JsonCSharpClassGenerator\JsonClassGenerator.csproj", "{7BEF7EAA-DE37-40FB-BD33-3DEF0685031F}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JsonClassGeneratorConsole", "JsonClassGeneratorConsole\JsonClassGeneratorConsole.csproj", "{64B9000F-D996-4B46-A61E-398DC1CB90A5}"
 EndProject
